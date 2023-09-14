@@ -1,0 +1,70 @@
+package controller;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class ThreadSaposEba extends Thread{
+    private int i;
+    static int SAPO[] = new int[5];
+    static int id[] = new int[5];
+    private boolean await;
+    public ThreadSaposEba(int i){
+        this.i = i;
+    }
+
+    @Override
+    public void run() {
+        int colocacao = 1;
+        Scanner leia = new Scanner(System.in);
+        int y;
+        try {
+            sleep(i * 1000);
+            if (i < 4){
+            System.out.println(i);
+            } else { System.out.println("JÁ!!");
+            }
+            int j = 0, distancia = 0;
+        id[i] = (int) getId();
+        if (i == 4){
+            //System.out.println("Antes de tudo, determine o tamanho do trajeto da corrida :P ");
+            // int CHEGADA = leia.nextInt(); <------ caso queira selecionar o tamanho da corrida
+            //System.out.println("Agora, digite o tamanho maximo do salto ");
+            // int saltomax = leia.nextInt(); <----- esse e para a distancia maxima de salto
+            int CHEGADA = 10;
+            Random aleatorio = new Random();
+            while (j < CHEGADA){
+                for (int x = 0; x < SAPO.length; x++){
+                    if (SAPO[x] > -1){
+                    // distancia = aleatorio.nextInt(saltomax + 1);
+                    distancia = aleatorio.nextInt(6);
+                    SAPO[x] += distancia;
+                    System.out.println("Sapo #" + id[x] + " deu um salto de = " + distancia + " de distancia!!");
+                    // sleep( 3000);
+                        System.out.println("A CORRIDA ESTÁ ACIRRADA!!");
+                        if (SAPO[x] > CHEGADA){
+                        if (colocacao == 1 && SAPO[x] > -1){
+                            System.out.println("O sapo #" + id[x] + " venceu a corrida!! (TRAGAM O PREMIO)");
+                            colocacao += 1;
+                            SAPO[x] = -1;
+                            x = 4;
+                        }
+                        else if (colocacao != 5 && SAPO[x] > -1){
+                            System.out.println("O sapo #" + id[x] + " nao venceu a corrida!! (Mas ele não foi tao ruim...)");
+                            colocacao += 1;
+                            SAPO[x] = -1;
+                        } else {System.out.println("O sapo #" + id[x] + "perdeu feio a corrida!! (MUITO RUIM FILHO)");
+                        j = CHEGADA;
+                        // to com um pouco de sono, mas foi divertido msm assim
+                    }
+                    }
+                }
+            }
+        }
+        }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+// Esse aqui eu enchi mt linguiça, mas espero ter feito certo plmnskkkkk

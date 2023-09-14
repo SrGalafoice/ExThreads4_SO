@@ -1,0 +1,15 @@
+package view;
+
+import controller.ThreadSaposEba;
+
+public class MainSAPO {
+// ADORO SAPOS :D
+   static int i;
+    public static void main(String[] args) {
+        System.out.println("COMEÇOU A CORRIDA DOS FROGS");
+        for (i = 0; i < 5; i++){
+        Thread TSE = new ThreadSaposEba(i);
+        TSE.start();
+
+}}
+}

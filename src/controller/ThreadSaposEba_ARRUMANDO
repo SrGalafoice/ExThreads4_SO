@@ -1,0 +1,83 @@
+package controller;
+
+import java.util.Random;
+
+public class ThreadSaposEba extends Thread{
+    private int i;
+    private int colocacao = 1;
+    private final int id = (int) getId();
+
+    public ThreadSaposEba(int i){
+        this.i = i;
+    }
+
+    @Override
+    public void run() {
+        Random aleatorio = new Random();
+        int chegada = 10;
+        int progresso = 0;
+
+        while (progresso < chegada){
+
+            SapoPulo(progresso, aleatorio);
+        }
+        SapoColocacao();
+
+    }
+
+    private int SapoPulo(int progresso, Random aleatorio) {
+        int salto = aleatorio.nextInt(11);
+        System.out.println("O Sapo #" + id + "deu um pulo de exatos " + salto + " metros (MUITA COISA!!)" );
+        progresso += salto;
+        System.out.println(progresso);
+        return progresso;
+    }
+
+    private void SapoColocacao() {
+        System.out.println("O Sapo #" + id + " terminou a corrida em " + colocacao + " lugar!!!!!!!!");
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package view;
+
+import controller.ThreadSaposEba;
+
+public class MainSAPO {
+    // ADORO SAPOS :D
+    static int i;
+    public static void main(String[] args) {
+        Thread sapo[] = new Thread[5];
+        System.out.println("COMEÇOU A CORRIDA DOS FROGS");
+        for (i = 0; i < 5; i++){
+            sapo[i] = new ThreadSaposEba(i);
+
+        }
+        for (Thread sapos : sapo){
+
+            sapos.start();
+        }
+    }
+}

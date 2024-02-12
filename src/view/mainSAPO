@@ -6,10 +6,10 @@ public class MainSAPO {
 // ADORO SAPOS :D
    static int i;
     public static void main(String[] args) {
+      Thread[] sapo = new Thread[5];
         System.out.println("COMEÇOU A CORRIDA DOS FROGS");
-        for (i = 0; i < 5; i++){
-        Thread TSE = new ThreadSaposEba(i);
-        TSE.start();
+        for (i = 0; i < 5; i++) sapo[i] = new ThreadSaposEba(i);
+        for (Thread sapos : sapo) sapos.start();
 
-}}
+}
 }
